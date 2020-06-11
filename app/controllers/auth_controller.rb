@@ -9,4 +9,13 @@ class AuthController < ApplicationController
       render json: { message: 'Invalid credentials' }, status: 400
     end
   end
+
+  def verify
+    token = request.headers['Authorization'].split('Bearer ')[1]
+    if AuthService.new.decode(token)
+      render :head
+    else
+      render json: { message: 'Invalid token' }, status: 400
+    end
+  end
 end
