@@ -1,0 +1,2 @@
+create-db: bin/rake db:create
+migration: bin/rake db:migrate

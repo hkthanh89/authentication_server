@@ -1,5 +1,5 @@
 class AuthService
-  SECRET_KEY = Rails.application.secrets.secret_key_base
+  SECRET_KEY = ENV['SECRET_KEY_BASE']
 
   def encode(payload, secret = SECRET_KEY)
     token = JWT.encode payload, secret, 'HS256'
