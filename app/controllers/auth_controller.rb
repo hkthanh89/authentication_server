@@ -12,7 +12,9 @@ class AuthController < ApplicationController
 
   def verify
     token = request.headers['Authorization'].split('Bearer ')[1]
-    if AuthService.new.decode(token)
+    payload = AuthService.new.decode(token)
+    if payload
+      response.set_header('X-Auth-User-Id', payload['id'])
       render :head
     else
       render json: { message: 'Invalid token' }, status: 400
